@@ -1,0 +1,34 @@
+version: "3.3"
+
+services:
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "somepassword"
+      MYSQL_DATABASE: "websitedb"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "userpasswd"
+
+  php:
+    depends_on:
+      - db
+    image: php:7.3-apache
+    ports:
+      - "8000:80"
+    restart: always
+    volumes:
+      - /var/www/html:/var/www/html
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "userpasswd"
