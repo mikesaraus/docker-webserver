@@ -31,4 +31,4 @@ services:
     restart: always
     environment:
       MYSQL_USER: "root"
-      MYSQL_ROOT_PASSWORD: "userpasswd"
+      MYSQL_ROOT_PASSWORD: "somepassword"
